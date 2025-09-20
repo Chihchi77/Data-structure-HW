@@ -1,10 +1,15 @@
 #include <fstream>
-#include <list>
+#include <struct>
 using namespace std;
+
+struct Node{
+  int data;
+  Node* next;
+}
 
 class SList(){
 private:
-  list<int> slist;
+  Node* head;
 public:
   SList();
   SList(list L);
@@ -15,4 +20,3 @@ public:
   void list_delete(Node* n);
   int list_ins_del(int k);
   void list_reverse();
-}
