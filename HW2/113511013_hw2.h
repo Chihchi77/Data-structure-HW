@@ -1,5 +1,4 @@
 #include <fstream>
-#include <struct>
 using namespace std;
 
 //node for singlelist

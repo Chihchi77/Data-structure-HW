@@ -1,15 +1,17 @@
 #include "113511013_hw2.h"
-#include <struct>
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <cstdint>
+#include <chrono>
 using namespace std;
 
 //singlelist
 SingleList::SingleList(): head(nullptr){}
-SingleList::SingleList(Node* h): head = h{}
-SingleList::~SingleList(): head(nullptr){}
+SingleList::SingleList(Node* h): head(h){}
+SingleList::~SingleList():{
+  head = nullptr;
+}
 ofstream& SingleList::list_walk(ofstream& fout, string& filename){
   fout.open(filename);
 
@@ -22,15 +24,17 @@ ofstream& SingleList::list_walk(ofstream& fout, string& filename){
   while (curr != nullptr){
     if (curr->next != nullptr)
       fout << curr << ", ";
-    else fout << curr << endl;
+    else fout << curr->data << endl;
     curr = curr->next;
   }
 
   return fout;
 }
 void SingleList::list_insert(int k){
-  head->next = head;
-  head->data = k;
+  Node* newnode;
+  newnode->data = k;
+  newnode->next = head;
+  head = newnode;
   return;
 }
 bool SingleList::list_search(int k){
@@ -44,7 +48,7 @@ bool SingleList::list_search(int k){
 
   if (curr == nullptr) return false;
 }
-void SingleList::ist_delete(Node* n){
+void SingleList::list_delete(Node* n){
   Node* curr = head;
 
   if (curr == n){
@@ -74,21 +78,22 @@ int SingleList::list_ins_del(int k){
     curr = curr->next;
   }
   if (curr == nullptr){
-    head->next = head;
-    head->data = k;
+    Node* newnode;
+    newnode->data = k;
+    newnode->next = head;
+    head = newnode;
     return 0;
   }
 }
 void SingleList::list_reverse(){
   Node* curr = head;
   Node* prev = nullptr;
-  Node* nxt = curr->next;
 
   while (curr != nullptr){
+    Node* nxt = curr->next;
     curr->next = prev;
     prev = curr;
     curr = nxt;
-    nxt = curr->next;
   }
 
   head = prev;
@@ -103,7 +108,9 @@ Nodex* XOR(Nodex* a, Nodex* b){
 
 XORList::XORList(): head(nullptr){}
 XORList::XORList(Nodex* h): head(h){}
-XORList::~XORList(): head(nullptr){}
+XORList::~XORList():{
+  head = nullptr;
+}
 ofstream& XORList::list_walk(ofstream& fout, string& filename){
   fout.open(filename);
   if (!fout.is_open()){
