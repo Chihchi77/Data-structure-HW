@@ -130,7 +130,7 @@ ofstream& XORList::list_walk(ofstream& fout, string& filename){
   return fout;
 }
 void XORList::list_insert(int k){
-  Nodex* newnode;
+  Nodex* newnode = new Nodex();
   newnode->data = k;
   newnode->npx = XOR(nullptr, head);
   
@@ -170,7 +170,7 @@ void XORList::list_delete(Nodex* n){
     return;
   }
 
-  Node* next = XOR(prev, curr->npx);
+  Nodex* next = XOR(prev, curr->npx);
 
   // 更新 prev 的 npx
   if (prev != nullptr) {
@@ -216,13 +216,13 @@ int XORList::list_ins_del(int k){
 }
 void XORList::list_reverse(){
   Nodex* curr = head;
-  Nodex* prev = nullptr
+  Nodex* prev = nullptr;
   while (curr != nullptr){
     Nodex* next = XOR(prev, curr->npx);
     prev = curr;
     curr = next;
   }
-  head = curr;
+  head = prev;
   return;
 }
 
