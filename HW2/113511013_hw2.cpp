@@ -151,11 +151,40 @@ bool XORList::list_search(int k){
 }
 void XORList::list_delete(Nodex* n){
   Nodex* curr = head;
-  while (curr != nullptr){
-    if (curr == n){
-      
-    }
+  Nodex* prev = nullptr;
+  while (curr != nullptr && curr != n){
+    Nodex* next = XOR(prev, curr->npx);
+    prev = curr;
+    curr = next;
   }
+  //沒找到n
+  if (curr == nullptr){
+    cerr << "??" << endl;
+    return;
+  }
+
+  Node* next = XOR(prev, curr->npx);
+
+  // 更新 prev 的 npx
+  if (prev != nullptr) {
+    prev->npx = XOR(XOR(prev->npx, curr), next);
+  } else {
+  // 如果刪掉的是頭節點
+    head = next;
+  }
+
+  // 更新 next 的 npx
+  if (next != nullptr) {
+    next->npx = XOR(XOR(next->npx, curr), prev);
+  }
+
+  return;
 }
-int XORList::list_ins_del(int k);
+int XORList::list_ins_del(int k){
+
+}
 void XORList::list_reverse();
+
+int main(){
+  
+}
