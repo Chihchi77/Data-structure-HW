@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdint>
 #include <chrono>
+#include <random>
 using namespace std;
 
 //singlelist
@@ -226,6 +227,74 @@ void XORList::list_reverse(){
   return;
 }
 
-int main(){
+//driver code
+void slist_test(){
+  cout << "Testing SingleList......" << endl;
+  SingleList list;
+  auto start = chrono::high_resolution_clock::now();
 
+  for (int i = 0; i < 200000; i++){
+    int val = rand() % 1000000 + 1;
+    list.list_insert(val);
+  }
+
+  for (int i = 0; i < 200000; i++){
+    int val = rand() % 1000000 + 1;
+    list.list_ins_del(val);
+  }
+
+  ofstream fout;
+  string f1 = "slist_test_output1.txt";
+  list.list_walk(fout, f1);
+  fout.close();
+
+  list.list_reverse();
+  string f2 = "slist_test_output2.txt";
+  list.list_walk(fout, f2);
+  fout.close();
+  
+  auto end = chrono::high_resolution_clock::now();
+  cout << "SingleList time: "
+       << chrono::duration_cast<chrono::milliseconds>(end - start).count()
+       << " ms" << endl;
+  return;
+}
+
+void xlist_test(){
+  cout << "Testing XORList......" << endl;
+  XORList list;
+  auto start = chrono::high_resolution_clock::now();
+
+  for (int i = 0; i < 200000; i++){
+    int val = rand() % 1000000 + 1;
+    list.list_insert(val);
+  }
+
+  for (int i = 0; i < 200000; i++){
+    int val = rand() % 1000000 + 1;
+    list.list_ins_del(val);
+  }
+
+  ofstream fout;
+  string f1 = "xlist_test_output1.txt";
+  list.list_walk(fout, f1);
+  fout.close();
+
+  list.list_reverse();
+  string f2 = "xlist_test_output2.txt";
+  list.list_walk(fout, f2);
+  fout.close();
+  
+  auto end = chrono::high_resolution_clock::now();
+  cout << "XORList time: "
+       << chrono::duration_cast<chrono::milliseconds>(end - start).count()
+       << " ms" << endl;
+  return;
+}
+
+int main(){
+  srand(time(0));
+  slist_test();
+  xlist_test();
+  return 0;
 }
