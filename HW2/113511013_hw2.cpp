@@ -181,10 +181,44 @@ void XORList::list_delete(Nodex* n){
   return;
 }
 int XORList::list_ins_del(int k){
+  Nodex* curr = head;
+  Nodex* prev = nullptr;
 
+  while(curr != nullptr){
+    if (curr->data == k){
+
+      return 1;
+    }
+    Nodex* next = XOR(prev, curr->npx);
+    prev = curr;
+    curr = next;
+  }
+
+  if (curr == nullptr){
+    Nodex* newnode;
+    newnode->data = k;
+    newnode->npx = XOR(nullptr, head);
+  
+    if (head != nullptr){
+      Nodex* next = XOR(nullptr, head->npx);
+      head->npx = XOR(newnode, next);
+    }
+    head = newnode;
+    return 0;
+  }
 }
-void XORList::list_reverse();
+void XORList::list_reverse(){
+  Nodex* curr = head;
+  Nodex* prev = nullptr
+  while (curr != nullptr){
+    Nodex* next = XOR(prev, curr->npx);
+    prev = curr;
+    curr = next;
+  }
+  head = curr;
+  return;
+}
 
 int main(){
-  
+
 }
