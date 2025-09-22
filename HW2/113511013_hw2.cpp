@@ -42,7 +42,12 @@ void SingleList::list_prepend(int k){
   newnode->data = k;
   newnode->next = head;
   head = newnode;
-  cout << "Inserted " << k << endl;
+  return;
+}
+void Sinlelist::list_insert(Node* x, Node* y){
+  x->next = y->next;
+  y->next = x;
+  cout << "Inserted " << x->data << endl;
   return;
 }
 bool SingleList::list_search(int k){
@@ -180,7 +185,25 @@ void XORList::list_prepend(int k){
     head->npx = XOR(newnode, next);
   }
   head = newnode;
-  cout << "Inserted " << k << endl;
+  return;
+}
+void XORList::list_insert(Nodex* x, Nodex* y){
+  Nodex* curr = head;
+  Nodex* prev = nullptr;
+  while (curr != nullptr && curr != y){
+    Nodex* temp = curr;
+    curr = XOR(prev, curr->npx);
+    prev = temp;
+  }
+
+  Nodex* next = XOR(prev, curr->npx);
+  x->npx = XOR(y, next);
+  y->npx = XOR(prev, x);
+  if (next != nullptr){
+    next->npx = XOR(XOR(next->npx, y), x);
+  }
+
+  cout << "Inserted " << x->data << endl;
   return;
 }
 bool XORList::list_search(int k){
