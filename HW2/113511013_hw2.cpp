@@ -10,7 +10,7 @@ using namespace std;
 //singlelist
 SingleList::SingleList(): head(nullptr){}
 SingleList::SingleList(Node* h): head(h){}
-SingleList::~SingleList():{
+SingleList::~SingleList(){
   head = nullptr;
 }
 ofstream& SingleList::list_walk(ofstream& fout, string& filename){
@@ -24,15 +24,16 @@ ofstream& SingleList::list_walk(ofstream& fout, string& filename){
   Node* curr = head;
   while (curr != nullptr){
     if (curr->next != nullptr)
-      fout << curr << ", ";
+      fout << curr->data << ", ";
     else fout << curr->data << endl;
     curr = curr->next;
   }
-
+  
+  fout.close();
   return fout;
 }
 void SingleList::list_insert(int k){
-  Node* newnode;
+  Node* newnode = new Node();
   newnode->data = k;
   newnode->next = head;
   head = newnode;
@@ -44,22 +45,27 @@ bool SingleList::list_search(int k){
   while (curr != nullptr){
     if ((curr->data) == k)
       return true;
-    else curr = curr->next;
+    curr = curr->next;
   }
 
-  if (curr == nullptr) return false;
+  return false;
 }
 void SingleList::list_delete(Node* n){
   Node* curr = head;
 
   if (curr == n){
-    curr = curr->next;
+    head = head->next;
+    delete curr;
     return;
   }
 
   while(curr != nullptr){
-    if (curr->next == n)
-      curr->next = n->next;
+    if (curr->next == n){
+      Node* target = curr->next;
+      curr->next = target->next;
+      delete target;
+      return;
+    }
     curr = curr->next;
   }
 
@@ -68,18 +74,20 @@ void SingleList::list_delete(Node* n){
 int SingleList::list_ins_del(int k){
   Node* curr = head;
   Node* curr_nxt = curr->next;
-  SList S(head);
 
   //insert->return 0; delete-> return 1;
   while(curr != nullptr){
-    if (curr_nxt->data == k){
-      curr->next = curr_nxt->next;
+    if (curr->next != nullptr && curr->next->data == k) {
+      Node* target = curr->next;
+      curr->next = target->next;
+      delete target;
       return 1;
     }
+
     curr = curr->next;
   }
   if (curr == nullptr){
-    Node* newnode;
+    Node* newnode = new Node();
     newnode->data = k;
     newnode->next = head;
     head = newnode;
@@ -109,7 +117,7 @@ Nodex* XOR(Nodex* a, Nodex* b){
 
 XORList::XORList(): head(nullptr){}
 XORList::XORList(Nodex* h): head(h){}
-XORList::~XORList():{
+XORList::~XORList(){
   head = nullptr;
 }
 ofstream& XORList::list_walk(ofstream& fout, string& filename){
@@ -128,6 +136,7 @@ ofstream& XORList::list_walk(ofstream& fout, string& filename){
     prev = curr;
     curr = XOR(prev, curr->npx);
   }
+  fout.close();
   return fout;
 }
 void XORList::list_insert(int k){
@@ -185,7 +194,7 @@ void XORList::list_delete(Nodex* n){
   if (next != nullptr) {
     next->npx = XOR(XOR(next->npx, curr), prev);
   }
-
+  delete curr;
   return;
 }
 int XORList::list_ins_del(int k){
@@ -203,7 +212,7 @@ int XORList::list_ins_del(int k){
   }
 
   if (curr == nullptr){
-    Nodex* newnode;
+    Nodex* newnode = new Nodex();
     newnode->data = k;
     newnode->npx = XOR(nullptr, head);
   
