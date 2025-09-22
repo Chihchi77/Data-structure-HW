@@ -21,7 +21,7 @@ public:
   SingleList(Node* h);
   ~SingleList();
   ofstream& list_walk(ofstream& fout, string& filename);
-  void list_insert(int k);//insert k to the head of slist
+  void list_prepend(int k);//insert k to the head of slist
   bool list_search(int k);
   void list_delete(Node* n);
   int list_ins_del(int k);
@@ -36,7 +36,7 @@ public:
     XORList(Nodex* h);
     ~XORList();
     ofstream& list_walk(ofstream& fout, string& filename);
-    void list_insert(int k);//insert k to the head of slist
+    void list_prepend(int k);//insert k to the head of slist
     bool list_search(int k);
     void list_delete(Nodex* n);
     int list_ins_del(int k);
