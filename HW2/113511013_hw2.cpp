@@ -152,11 +152,13 @@ ofstream& XORList::list_walk(ofstream& fout, string& filename){
   Nodex* prev = nullptr;
   Nodex* curr = head;
   while (curr != nullptr){
-    if (XOR(prev, curr->npx) != nullptr)
+    Nodex* next = XOR(prev, curr->npx);
+    if (next != nullptr)
       fout << curr->data << ", ";
-    else fout << curr->data << endl;
+    else
+      fout << curr->data << endl;
     prev = curr;
-    curr = XOR(prev, curr->npx);
+    curr = next;
   }
 
   return fout;
@@ -233,7 +235,6 @@ int XORList::list_ins_del(int k){
       // 如果刪掉的是頭節點
         head = next;
       }
-
       // 更新 next 的 npx
       if (next != nullptr) {
         next->npx = XOR(XOR(next->npx, curr), prev);
