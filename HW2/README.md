@@ -110,10 +110,11 @@ XORList time: 255843 ms
 - 說明：此程式碼實作Single linked list 與 XOR linked list，並透過 driver code 驗證正確性與比較效能。
 
 ## 小廢話
-- 雖然但是這個readme有AI成分，其他只有讓AI教我我自己寫。
+- 雖然但是這個readme有AI成分，其他最多只有讓AI教我我自己寫。
 - 教授您給的要求我沒有很看得懂，可能有些function寫的跟題目有偏差，望海涵。
 - 還有您的ppt會偷偷更新，我寫完準備交了別人才跟我說最新的要求跟之前不一樣......
+- 還有還有這個作業並不簡單........
 
-***最重要的一點***
+***最最重要的一點***
 - 我使用了github版本控制管理我的作業們，我想加分TUT
 - https://github.com/Chihchi77/Data-structure-HW
