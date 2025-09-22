@@ -37,7 +37,7 @@ ofstream& SingleList::list_walk(ofstream& fout, string& filename){
   
   return fout;
 }
-void SingleList::list_insert(int k){
+void SingleList::list_prepend(int k){
   Node* newnode = new Node();
   newnode->data = k;
   newnode->next = head;
@@ -170,7 +170,7 @@ ofstream& XORList::list_walk(ofstream& fout, string& filename){
 
   return fout;
 }
-void XORList::list_insert(int k){
+void XORList::list_prepend(int k){
   Nodex* newnode = new Nodex();
   newnode->data = k;
   newnode->npx = XOR(nullptr, head);
@@ -293,7 +293,7 @@ void slist_test(){
 
   for (int i = 0; i < 200000; i++){
     int val = rand() % 1000000 + 1;
-    list.list_insert(val);
+    list.list_prepend(val);
   }
 
   for (int i = 0; i < 200000; i++){
@@ -325,7 +325,7 @@ void xlist_test(){
 
   for (int i = 0; i < 200000; i++){
     int val = rand() % 1000000 + 1;
-    list.list_insert(val);
+    list.list_prepend(val);
   }
 
   for (int i = 0; i < 200000; i++){
