@@ -63,7 +63,7 @@ void SingleList::list_delete(Node* n){
   if (curr == n){
     head = head->next;
     delete curr;
-    cout << "Deleted " << k << endl;
+    cout << "Deleted " << n->data << endl;
     return;
   }
 
@@ -72,12 +72,12 @@ void SingleList::list_delete(Node* n){
       Node* target = curr->next;
       curr->next = target->next;
       delete target;
-      cout << "Deleted " << k << endl;
+      cout << "Deleted " << n->data << endl;
       return;
     }
     curr = curr->next;
   }
-  cout << "Deleted " << k << endl;
+  cout << "Deleted " << n->data << endl;
   return;
 }
 int SingleList::list_ins_del(int k){
