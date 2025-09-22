@@ -44,7 +44,7 @@ void SingleList::list_prepend(int k){
   head = newnode;
   return;
 }
-void Sinlelist::list_insert(Node* x, Node* y){
+void SingleList::list_insert(Node* x, Node* y){
   x->next = y->next;
   y->next = x;
   cout << "Inserted " << x->data << endl;
@@ -54,9 +54,10 @@ bool SingleList::list_search(int k){
   Node* curr = head;
 
   while (curr != nullptr){
-    if ((curr->data) == k)
+    if ((curr->data) == k){
       cout << "Found " << k << endl;
       return true;
+    }
     curr = curr->next;
   }
   cout << "Not Found " << k << endl;
@@ -82,7 +83,7 @@ void SingleList::list_delete(Node* n){
     }
     curr = curr->next;
   }
-  cout << "Deleted " << n->data << endl;
+  cerr << "??" << endl;
   return;
 }
 int SingleList::list_ins_del(int k){
@@ -117,6 +118,7 @@ int SingleList::list_ins_del(int k){
     cout << "Inserted " << k << endl;
     return 0;
   }
+  return -1;
 }
 void SingleList::list_reverse(){
   Node* curr = head;
@@ -211,9 +213,10 @@ bool XORList::list_search(int k){
   Nodex* prev = nullptr;
 
   while(curr != nullptr){
-    if (curr->data == k)
+    if (curr->data == k){
       cout << "Found " << k << endl;
       return true;
+    }
     Nodex* next = XOR(prev, curr->npx);
     prev = curr;
     curr = next;
@@ -295,6 +298,7 @@ int XORList::list_ins_del(int k){
     cout << "Inserted " << k << endl;
     return 0;
   }
+  return -1;
 }
 void XORList::list_reverse(){
   Nodex* curr = head;

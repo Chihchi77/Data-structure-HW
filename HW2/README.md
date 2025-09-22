@@ -86,7 +86,7 @@ make clean
 Testing SingleList......
 SingleList time: 105091 ms
 Testing XORList......
-XORList time: 832 ms
+XORList time: 255843 ms
 ```
 
 ---
