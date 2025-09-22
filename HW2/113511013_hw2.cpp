@@ -26,7 +26,7 @@ ofstream& SingleList::list_walk(ofstream& fout, string& filename){
     cerr << "Who is " << filename << "??" << endl;
     return fout;
   }
-
+  fout << "List: ";
   Node* curr = head;
   while (curr != nullptr){
     if (curr->next != nullptr)
@@ -42,6 +42,7 @@ void SingleList::list_insert(int k){
   newnode->data = k;
   newnode->next = head;
   head = newnode;
+  cout << "Inserted " << k << endl;
   return;
 }
 bool SingleList::list_search(int k){
@@ -49,10 +50,11 @@ bool SingleList::list_search(int k){
 
   while (curr != nullptr){
     if ((curr->data) == k)
+      cout << "Found " << k << endl;
       return true;
     curr = curr->next;
   }
-
+  cout << "Not Found " << k << endl;
   return false;
 }
 void SingleList::list_delete(Node* n){
@@ -61,6 +63,7 @@ void SingleList::list_delete(Node* n){
   if (curr == n){
     head = head->next;
     delete curr;
+    cout << "Deleted " << k << endl;
     return;
   }
 
@@ -69,11 +72,12 @@ void SingleList::list_delete(Node* n){
       Node* target = curr->next;
       curr->next = target->next;
       delete target;
+      cout << "Deleted " << k << endl;
       return;
     }
     curr = curr->next;
   }
-
+  cout << "Deleted " << k << endl;
   return;
 }
 int SingleList::list_ins_del(int k){
@@ -84,6 +88,7 @@ int SingleList::list_ins_del(int k){
     newnode->data = k;
     newnode->next = nullptr;
     head = newnode;
+    cout << "Inserted " << k << endl;
     return 0;
   }
 
@@ -93,6 +98,7 @@ int SingleList::list_ins_del(int k){
       Node* target = curr->next;
       curr->next = target->next;
       delete target;
+      cout << "Deleted " << k << endl;
       return 1;
     }
 
@@ -103,6 +109,7 @@ int SingleList::list_ins_del(int k){
     newnode->data = k;
     newnode->next = head;
     head = newnode;
+    cout << "Inserted " << k << endl;
     return 0;
   }
 }
@@ -148,7 +155,7 @@ ofstream& XORList::list_walk(ofstream& fout, string& filename){
     cerr << "Who is " << filename << "??" << endl;
     return fout;
   }
-
+  fout << "List: ";
   Nodex* prev = nullptr;
   Nodex* curr = head;
   while (curr != nullptr){
@@ -173,6 +180,7 @@ void XORList::list_insert(int k){
     head->npx = XOR(newnode, next);
   }
   head = newnode;
+  cout << "Inserted " << k << endl;
   return;
 }
 bool XORList::list_search(int k){
@@ -181,14 +189,17 @@ bool XORList::list_search(int k){
 
   while(curr != nullptr){
     if (curr->data == k)
+      cout << "Found " << k << endl;
       return true;
     Nodex* next = XOR(prev, curr->npx);
     prev = curr;
     curr = next;
   }
 
-  if (curr == nullptr)
+  if (curr == nullptr){
+    cout << "Not Found " << k << endl;
     return false;
+  }
 }
 void XORList::list_delete(Nodex* n){
   Nodex* curr = head;
@@ -219,6 +230,7 @@ void XORList::list_delete(Nodex* n){
     next->npx = XOR(XOR(next->npx, curr), prev);
   }
   delete curr;
+  cout << "Deleted " << n->data << endl;
   return;
 }
 int XORList::list_ins_del(int k){
@@ -240,6 +252,7 @@ int XORList::list_ins_del(int k){
         next->npx = XOR(XOR(next->npx, curr), prev);
       }
       delete curr;
+      cout << "Deleted " << k << endl;
       return 1;
     }
     prev = curr;
@@ -256,6 +269,7 @@ int XORList::list_ins_del(int k){
       head->npx = XOR(newnode, next);
     }
     head = newnode;
+    cout << "Inserted " << k << endl;
     return 0;
   }
 }
