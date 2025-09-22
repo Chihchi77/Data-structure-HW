@@ -11,6 +11,12 @@ using namespace std;
 SingleList::SingleList(): head(nullptr){}
 SingleList::SingleList(Node* h): head(h){}
 SingleList::~SingleList(){
+  Node* curr = head;
+  while (curr != nullptr){
+    Node* next = curr->next;
+    delete curr;
+    curr = next;
+  }
   head = nullptr;
 }
 ofstream& SingleList::list_walk(ofstream& fout, string& filename){
@@ -29,7 +35,6 @@ ofstream& SingleList::list_walk(ofstream& fout, string& filename){
     curr = curr->next;
   }
   
-  fout.close();
   return fout;
 }
 void SingleList::list_insert(int k){
@@ -73,7 +78,14 @@ void SingleList::list_delete(Node* n){
 }
 int SingleList::list_ins_del(int k){
   Node* curr = head;
-  Node* curr_nxt = curr->next;
+  
+  if (head == nullptr){
+    Node* newnode = new Node();
+    newnode->data = k;
+    newnode->next = nullptr;
+    head = newnode;
+    return 0;
+  }
 
   //insert->return 0; delete-> return 1;
   while(curr != nullptr){
@@ -118,6 +130,16 @@ Nodex* XOR(Nodex* a, Nodex* b){
 XORList::XORList(): head(nullptr){}
 XORList::XORList(Nodex* h): head(h){}
 XORList::~XORList(){
+  Nodex* curr = head;
+  Nodex* prev = nullptr;
+
+  while (curr != nullptr){
+    Nodex* next = XOR(prev, curr->npx);
+    prev = curr;
+    delete curr;
+    curr = next;
+  }
+  
   head = nullptr;
 }
 ofstream& XORList::list_walk(ofstream& fout, string& filename){
@@ -136,7 +158,7 @@ ofstream& XORList::list_walk(ofstream& fout, string& filename){
     prev = curr;
     curr = XOR(prev, curr->npx);
   }
-  fout.close();
+
   return fout;
 }
 void XORList::list_insert(int k){
@@ -202,11 +224,23 @@ int XORList::list_ins_del(int k){
   Nodex* prev = nullptr;
 
   while(curr != nullptr){
+    Nodex* next = XOR(prev, curr->npx);
     if (curr->data == k){
+      // 更新 prev 的 npx
+      if (prev != nullptr) {
+        prev->npx = XOR(XOR(prev->npx, curr), next);
+      } else {
+      // 如果刪掉的是頭節點
+        head = next;
+      }
 
+      // 更新 next 的 npx
+      if (next != nullptr) {
+        next->npx = XOR(XOR(next->npx, curr), prev);
+      }
+      delete curr;
       return 1;
     }
-    Nodex* next = XOR(prev, curr->npx);
     prev = curr;
     curr = next;
   }

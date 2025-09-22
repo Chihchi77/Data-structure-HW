@@ -5,15 +5,15 @@ using namespace std;
 struct Node{
   int data;
   Node* next;
-}
+};
 
 //node for xorlist
 struct Nodex{
   int data;
   Nodex* npx;
-}
+};
 
-class SingleList(){
+class SingleList{
 private:
   Node* head;
 public:
@@ -26,9 +26,9 @@ public:
   void list_delete(Node* n);
   int list_ins_del(int k);
   void list_reverse();
-}
+};
 
-  class XORList(){
+  class XORList{
   private:
     Nodex* head;
   public:
@@ -41,4 +41,4 @@ public:
     void list_delete(Nodex* n);
     int list_ins_del(int k);
     void list_reverse();
-  }
+  };
